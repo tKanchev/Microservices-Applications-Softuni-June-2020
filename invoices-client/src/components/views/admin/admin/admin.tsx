@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthenticationService from '../../../../services/authentication.service';
+import UsersList from '../../users/users-list/users-list';
 
 interface IAdminProps {}
 interface IAdminState {
@@ -39,7 +40,7 @@ class Admin extends Component<IAdminProps, IAdminState> {
 
         return (
             <div className='admin'>
-                Dobre doshal we kaput
+                <UsersList/>
             </div>
         );
     }

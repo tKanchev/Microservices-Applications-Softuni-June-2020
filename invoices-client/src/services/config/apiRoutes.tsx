@@ -15,7 +15,8 @@ export const ApiRoutes = {
     },
     users: {
         all: `${baseRouteDev.users}/all`,
-        delete: `${baseRouteDev.users}/delete`
+        delete: `${baseRouteDev.users}/delete`,
+        changePassword: `${baseRouteDev.users}/changePassword`
     },
     allInvoicesApiUrl: 'https://localhost:5007/invoices/all',
     invoicesAllClientsApiUrl: 'https://localhost:5007/invoices/allClients',

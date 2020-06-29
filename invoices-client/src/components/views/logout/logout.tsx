@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-import { PrimaryButton } from 'office-ui-fabric-react';
 
 interface ILogoutProps {}
 interface ILogoutState {

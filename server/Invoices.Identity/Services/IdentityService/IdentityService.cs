@@ -12,16 +12,21 @@ namespace Invoices.Identity.Services.IdentityService
 {
     public class IdentityService : IIdentityService
     {
-        private readonly InvoicesIdentityDbContext db;
         private readonly ITokenService tokenService;
         private readonly IUserService userService;
         private readonly IPasswordService passwordService;
+        private readonly InvoicesIdentityDbContext db;
 
-        public IdentityService(ITokenService tokenService, IUserService userService, IPasswordService passwordService)
+        public IdentityService(
+            ITokenService tokenService,
+            IUserService userService,
+            IPasswordService passwordService,
+            InvoicesIdentityDbContext db)
         {
             this.tokenService = tokenService;
             this.userService = userService;
             this.passwordService = passwordService;
+            this.db = db;
         }
 
         public AuthenticatedUserModel Authenticate(User user)

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
-import { Redirect} from 'react-router-dom';
 
 
 interface INavbarProps {}
@@ -21,17 +20,6 @@ class Navbar extends Component<INavbarProps, INavbarState> {
             logged: false,
             redirect: false
         }
-    }
-
-    componentDidMount() {
-        this.setState({errorMessage: ''}, async () => {
-            try {
-
-                
-            } catch (error) {
-                console.error(error);
-            }
-        })
     }
 
     isUserLogged(): boolean {
@@ -96,36 +84,12 @@ class Navbar extends Component<INavbarProps, INavbarState> {
             }
         ];
 
-        // if (this.state.redirect) {
-        //     return <Redirect to={{ pathname: '/' }} />
-        // }
-
         return (
             <CommandBar
                 className='navbar'
                 items={items}
                 farItems={this.isUserLogged() ? logout : login}
             />
-            // <Pivot className='navbar'>
-                
-            //     {/* <PivotItem headerText="Login" onClick={() => this.navigate('maika ti')}>
-            //     </PivotItem>
-            //     <PivotItem headerText="Register">
-            //         <Register/>
-            //     </PivotItem>
-            //     <PivotItem headerText="Create Role">
-            //         <CreateRole/>
-            //     </PivotItem>
-            //     <PivotItem headerText="Users">
-            //         <UserList/>
-            //     </PivotItem>
-            //     <PivotItem headerText="Invoices">
-            //         <Invoices/>
-            //     </PivotItem>
-            //     <PivotItem headerText="Logout">
-            //         <PrimaryButton className='logout-button' text="Logout" onClick={event => this.logout()}/>
-            //     </PivotItem> */}
-            // </Pivot>
         );
     }
 }

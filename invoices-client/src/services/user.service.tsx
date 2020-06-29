@@ -1,4 +1,4 @@
-import { get, remove } from './crud';
+import { get, post, remove } from './crud';
 import { ApiRoutes } from './config/apiRoutes';
 
 class UserService {
@@ -8,6 +8,10 @@ class UserService {
 
     public static delete(id: string): Promise<any> {
         return remove(ApiRoutes.users.delete, id);
+    }
+
+    public static changePassword(changePasswordInput: any): Promise<any> {
+        return post(ApiRoutes.users.changePassword, changePasswordInput);
     }
 }
 
