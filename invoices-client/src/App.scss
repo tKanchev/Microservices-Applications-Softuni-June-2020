@@ -1,0 +1,31 @@
+@import './components/views/login/login.scss';
+@import './components/views/register/register.scss';
+@import './components/views/roles/roles/roles.scss';
+@import './components/views/roles/create-role/create-role.scss';
+@import './components/views/users/users/users.scss';
+@import './components/views/users/users-list/users-list.scss';
+@import './components/views/invoices/invoices/invoices.scss';
+@import './components/views/invoices/create-invoice/create-invoice.scss';
+@import './components/views/invoices/list-invoices/list-invoices.scss';
+@import './components/views/home/home.scss';
+@import './components/views/logout/logout.scss';
+@import './components/navbar/navbar.scss';
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .ms-Button {
+    &--primary {
+      background: lightsteelblue;
+      border: none;
+      color: black;
+    }
+    &--commandBar {
+      background: lightsteelblue;
+    }
+  }
+  .ms-CommandBar {
+    background: lightsteelblue;
+  }
+}

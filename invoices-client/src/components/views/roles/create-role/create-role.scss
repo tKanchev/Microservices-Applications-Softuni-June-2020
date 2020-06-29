@@ -1,0 +1,19 @@
+.create-role {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    &__title {
+        font-size: 22px;
+        margin-bottom: 20px;
+        align-self: center;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        .actions {
+            &__create-button {
+                margin: 20px 20px 20px 0;
+            }
+        }
+    }
+}
