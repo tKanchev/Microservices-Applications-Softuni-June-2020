@@ -1,4 +1,5 @@
 ﻿using Invoices.Models.Invoices;
+using System;
 using System.Threading.Tasks;
 
 namespace Invoices.Services.Invoices
@@ -7,7 +8,7 @@ namespace Invoices.Services.Invoices
     {
         Task<InvoiceDto[]> AllAsync();
 
-        Task<InvoiceClientDto[]> AllClientsAsync();
+        Task<InvoiceDto[]> AllByUserIdAsync(Guid id);
 
         Task CreateAsync(InvoiceInput input);
     }

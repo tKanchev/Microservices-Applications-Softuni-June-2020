@@ -1,5 +1,5 @@
-﻿using Invoices.Data;
-using Invoices.Data.Entities;
+﻿using Invoices.Database;
+using Invoices.Database.Entities;
 using Invoices.Models.Invoices;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,38 +19,40 @@ namespace Invoices.Services.Invoices
 
         public async Task<InvoiceDto[]> AllAsync()
             => await this.db.Invoices
-                .Include(i => i.User)
                 .Select(i => new InvoiceDto 
                 {
                     Id = i.Id,
                     Number = i.Number,
                     UserId = i.UserId,
-                    ClientName = i.User.Name,
                     Date = i.Date,
                     Amount = i.Amount,
                     NationalIdentityNumber = i.NationalIdentityNumber
                 })
                 .ToArrayAsync();
 
-        public async Task<InvoiceClientDto[]> AllClientsAsync()
-            => await this.db.Users
-                    .Select(u => new InvoiceClientDto
-                    { 
-                        UserId = u.Id,
-                        Name = u.Name
-                    })
-                    .ToArrayAsync();
+        public async Task<InvoiceDto[]> AllByUserIdAsync(Guid id)
+           => await this.db.Invoices
+                .Where(i => i.UserId == id)
+               .Select(i => new InvoiceDto
+               {
+                   Id = i.Id,
+                   Number = i.Number,
+                   UserId = i.UserId,
+                   ClientName = i.ClientName,
+                   Date = i.Date,
+                   Amount = i.Amount,
+                   NationalIdentityNumber = i.NationalIdentityNumber
+               })
+               .ToArrayAsync();
 
         public async Task CreateAsync(InvoiceInput input)
         {
-            var user = await this.db.Users.FindAsync(input.UserId);
-            
             var invoice = new Invoice
             {
                 UserId = input.UserId,
                 Date = DateTime.Now,
                 Amount = input.Amount,
-                NationalIdentityNumber = user.NationalIdentityNumber
+                //NationalIdentityNumber = user.NationalIdentityNumber //TODO Get National Id Number
             };
 
             await this.db.AddAsync(invoice);

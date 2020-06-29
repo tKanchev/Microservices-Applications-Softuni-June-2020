@@ -1,31 +1,43 @@
 ﻿using Invoices.Models.Invoices;
-using Invoices.Services.Indentity.UserService;
 using Invoices.Services.Invoices;
+using Invoices.Shared.Controllers;
+using Invoices.Shared.Services.CurrentUserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
+
+using static Invoices.Shared.Constants.IdentityConstants.Admin;
 
 namespace Invoices.Controllers
 {
-    
+
     public class InvoicesController : ApiController
     {
-        private readonly IUserService userService;
         private readonly IInvoiceService invoiceService;
+        private readonly ILoggedUserService loggedUserService;
 
-        public InvoicesController(IUserService userService, IInvoiceService invoiceService)
+        public InvoicesController(IInvoiceService invoiceService, ILoggedUserService loggedUserService)
         {
-            this.userService = userService;
             this.invoiceService = invoiceService;
+            this.loggedUserService = loggedUserService;
         }
 
         [Authorize]
         [HttpGet]
         [Route(nameof(All))]
         public async Task<IActionResult> All()
-            => Ok(await this.invoiceService.AllAsync());
+        {
+            if (this.loggedUserService.IsAdmin)
+            {
+                return Ok(await this.invoiceService.AllAsync());
+            }
+
+            return Ok(await this.invoiceService.AllByUserIdAsync(Guid.Parse(this.loggedUserService.UserId)));
+        }
 
         [HttpPost]
+        [Authorize(Roles = AdminRoleName)]
         [Route(nameof(Create))]
         public async Task<IActionResult> Create(InvoiceInput input)
         {
@@ -34,10 +46,10 @@ namespace Invoices.Controllers
             return Ok("Invoice created successfully");
         }
 
-        [Authorize]
-        [HttpGet]
-        [Route(nameof(AllClients))]
-        public async Task<IActionResult> AllClients()
-            => Ok(await this.invoiceService.AllClientsAsync());
+        //[Authorize]
+        //[HttpGet]
+        //[Route(nameof(AllClients))]
+        //public async Task<IActionResult> AllClients()
+        //    => Ok(await this.invoiceService.AllClientsAsync());
     }
 }

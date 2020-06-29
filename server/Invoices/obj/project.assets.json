@@ -1506,6 +1506,23 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Invoices.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.5",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.5"
+        },
+        "compile": {
+          "bin/placeholder/Invoices.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Invoices.Shared.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -5714,10 +5731,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Invoices.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Invoices.Shared/Invoices.Shared.csproj",
+      "msbuildProject": "../Invoices.Shared/Invoices.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Invoices.Shared >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.5",
       "Microsoft.EntityFrameworkCore >= 3.1.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.5",
@@ -5754,7 +5777,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Projects\\Invoices\\server\\Invoices.Shared\\Invoices.Shared.csproj": {
+              "projectPath": "D:\\Projects\\Invoices\\server\\Invoices.Shared\\Invoices.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

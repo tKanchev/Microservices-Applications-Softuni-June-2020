@@ -112,3 +112,6 @@ D:\Projects\Invoices\server\Invoices\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Projects\Invoices\server\Invoices\obj\Debug\netcoreapp3.1\Invoices.csproj.CoreCompileInputs.cache
 D:\Projects\Invoices\server\Invoices\obj\Debug\netcoreapp3.1\Invoices.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\Invoices\server\Invoices\obj\Debug\netcoreapp3.1\Invoices.csprojAssemblyReference.cache
+D:\Projects\Invoices\server\Invoices\bin\Debug\netcoreapp3.1\Invoices.Shared.dll
+D:\Projects\Invoices\server\Invoices\bin\Debug\netcoreapp3.1\Invoices.Shared.pdb
+D:\Projects\Invoices\server\Invoices\obj\Debug\netcoreapp3.1\Invoices.MvcApplicationPartsAssemblyInfo.cs
