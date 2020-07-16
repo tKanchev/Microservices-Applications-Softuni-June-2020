@@ -3,6 +3,7 @@ import { Link } from 'office-ui-fabric-react/lib/Link';
 import { TextField, PrimaryButton } from 'office-ui-fabric-react';
 import AuthenticationService from '../../../services/authentication.service';
 import {Redirect} from 'react-router-dom';
+import TestService from '../../../services/test.service';
 
 interface ILoginProps {}
 interface ILoginState {
@@ -55,6 +56,7 @@ class Login extends Component<ILoginProps, ILoginState> {
                     
                     this.setState({redirect: true}, () => {window.location.reload()});
                 }
+                
             } catch (error) {
                 console.error(error);
             }

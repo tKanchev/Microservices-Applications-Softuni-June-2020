@@ -16,6 +16,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  .notification {
+    margin-top: 40px;
+    width: 40%;
+  }
   .ms-Button {
     &--primary {
       background: lightsteelblue;

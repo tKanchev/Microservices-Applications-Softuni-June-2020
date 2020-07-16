@@ -15,13 +15,13 @@ namespace Invoices.Shared.Extensions
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection()
+            app
+                .UseHttpsRedirection()
                 .UseRouting()
                 .UseCors(options => options
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                 )
+                    .AllowAnyMethod())
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints => endpoints

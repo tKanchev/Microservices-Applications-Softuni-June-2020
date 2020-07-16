@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { TextField, PrimaryButton } from 'office-ui-fabric-react';
 import InvoiceService from '../../../../services/invoice.service';
-import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 
 interface ICreateinvoiceProps {}
 interface ICreateInvoiceState {
-    clients: IDropdownOption[];
-    client: string;
+    idNumber: string;
+    name: string;
     amount: string;
     errorMessage: string;
 }
@@ -16,30 +15,29 @@ class CreateInvoice extends Component<ICreateinvoiceProps, ICreateInvoiceState> 
         super(props);
         
         this.state = {
-            clients: [],
-            client: '',
+            idNumber: '',
+            name: '',
             amount: '',
             errorMessage: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        this.setState({errorMessage: ''}, async () => {
-            try {
-                const clientsResult = await InvoiceService.allClients() as [];
-                const clients = clientsResult.map((c: any) => {return { key: c.userId, text: c.name }});
+        // this.setState({errorMessage: ''}, async () => {
+        //     try {
+        //         // const clientsResult = await InvoiceService.allClients() as [];
+        //         // const clients = clientsResult.map((c: any) => {return { key: c.userId, text: c.name }});
                 
-                this.setState({clients: clients})
+        //         // this.setState({clients: clients})
                 
-                console.log(clients)
-            } catch (error) {
-                console.error(error);
-            }
-        })
+        //         // console.log(clients)
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // })
     }
 
     private handleInputChange(event: any) {
@@ -52,23 +50,13 @@ class CreateInvoice extends Component<ICreateinvoiceProps, ICreateInvoiceState> 
         }));
     }
 
-    private handleDropdownChange(event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption | undefined) {
-        const target = event.target;
-        const client = option as any;
-        console.log(target)
-        console.log(client.key)
-        this.setState(prevState => ({
-            ...prevState,
-            client: client.key
-        }));
-    }
-
     private handleSubmit(event: any) {
         event.preventDefault();
         this.setState({errorMessage: ''}, async () => {
             try {
                 const invoice = {
-                    userId: this.state.client,
+                    idNumber: this.state.idNumber,
+                    name: this.state.name,
                     amount: +this.state.amount
                 }
 
@@ -91,13 +79,20 @@ class CreateInvoice extends Component<ICreateinvoiceProps, ICreateInvoiceState> 
                         this.handleSubmit(event);
                     }}
                 >
-                    <Dropdown
-                        placeholder="Select an option"
-                        label='Client '
-                        id='client'
-                        options={this.state.clients}
-                        selectedKey={this.state.client}
-                        onChange={this.handleDropdownChange}
+                    <TextField
+                        label='Id Number '
+                        id='idNumber'
+                        name='idNumber'
+                        value={this.state.idNumber}
+                        onChange={this.handleInputChange}
+                        required
+                    />
+                    <TextField
+                        label='Name '
+                        id='name'
+                        name='name'
+                        value={this.state.name}
+                        onChange={this.handleInputChange}
                         required
                     />
                     <TextField

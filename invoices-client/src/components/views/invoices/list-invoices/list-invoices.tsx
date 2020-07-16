@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DetailsList, DetailsListLayoutMode, IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import InvoiceService from '../../../../services/invoice.service';
+import TestService from '../../../../services/test.service';
 
 interface IListInvoicesProps {}
 interface IListInvoicesState {
@@ -32,6 +33,7 @@ class ListInvoices extends Component<IListInvoicesProps, IListInvoicesState> {
         this.setState({errorMessage: ''}, async () => {
             try {
                 const invoices = await InvoiceService.all();
+                console.log(invoices);
                 this.setState({invoices: invoices})
             } catch (error) {
                 console.error(error);

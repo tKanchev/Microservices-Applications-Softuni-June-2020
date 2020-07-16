@@ -3,15 +3,15 @@ import { ApiRoutes } from './config/apiRoutes';
 
 class InvoiceService {
     public static all(): Promise<any> {
-        return get(ApiRoutes.allInvoicesApiUrl);
+        return get(ApiRoutes.invoices.all);
     }
 
-    public static allClients(): Promise<any> {
-        return get(ApiRoutes.invoicesAllClientsApiUrl);
-    }
+    // public static allClients(): Promise<any> {
+    //     return get(ApiRoutes.invoicesAllClientsApiUrl);
+    // }
 
     public static create(invoice: any): Promise<any> {
-        return post(ApiRoutes.invoicesCreateApiUrl, invoice);
+        return post(ApiRoutes.invoices.create, invoice);
     }
 }
 

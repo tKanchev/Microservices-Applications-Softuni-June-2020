@@ -2,6 +2,7 @@
 using Invoices.Identity.Services.UserService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 using static Invoices.Shared.Constants.IdentityConstants.Admin;
@@ -28,7 +29,7 @@ namespace Invoices.Identity.Extensions
                 var adminUserExists = await userService.ExistsByEmailAsync(AdminUserEmail);
                 if (!adminUserExists)
                 {
-                    await userService.CreateAsync(AdminUserIdentityNumber, AdminUserName, AdminUserEmail, AdminUserPassword);
+                    await userService.CreateAsync(Guid.NewGuid(), AdminUserIdentityNumber, AdminUserName, AdminUserEmail, AdminUserPassword);
                 }
 
                 var userIsAdmin = await userService.IsInRoleAsync(AdminUserEmail, AdminRoleName);

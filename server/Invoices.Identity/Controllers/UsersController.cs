@@ -2,6 +2,7 @@
 using Invoices.Identity.Services.IdentityService;
 using Invoices.Identity.Services.UserService;
 using Invoices.Shared.Controllers;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,10 +10,12 @@ using System.Threading.Tasks;
 
 namespace Invoices.Identity.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : ApiController
     {
         private const string UserNotExistsErrorMessage = "User not exists.";
         private const string EmptyPasswordErrorMessage = "Password cannot be empty.";
+        private const string RequiredIdNumber = "Id number is required.";
 
         private readonly IUserService userService;
         private readonly IIdentityService identityService;
@@ -23,7 +26,6 @@ namespace Invoices.Identity.Controllers
             this.identityService = identityService;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route(nameof(All))]
         public async Task<IActionResult> All()
@@ -33,7 +35,6 @@ namespace Invoices.Identity.Controllers
             return Ok(users);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route(nameof(Delete))]
         public async Task<IActionResult> Delete([FromBody] Guid id)
@@ -48,7 +49,7 @@ namespace Invoices.Identity.Controllers
             return Ok("User deleted.");
         }
 
-        [Authorize(Roles = "Admin")]
+        
         [HttpPost]
         [Route(nameof(ChangePassword))]
         public async Task<IActionResult> ChangePassword(ChangePasswordInput input)
@@ -67,6 +68,20 @@ namespace Invoices.Identity.Controllers
             await this.identityService.ChangePassword(input.UserId, input.Password);
 
             return Ok("Password changed!");
+        }
+
+        [HttpGet]
+        [Route(nameof(GetUserIdByIdNumber))]
+        public async Task<IActionResult> GetUserIdByIdNumber(string idNumber)
+        {
+            if (string.IsNullOrEmpty(idNumber))
+            {
+                return BadRequest(RequiredIdNumber);
+            }
+
+            var userId = await this.userService.GetUserIdByIdNumber(idNumber);
+
+            return Ok(userId);
         }
     }
 }

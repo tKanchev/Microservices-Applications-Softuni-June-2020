@@ -31,3 +31,10 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+/server/.vs/Invoices/v16/.suo
+/server/Invoices/bin/Debug/netcoreapp3.1/Invoices.dll
+/server/Invoices/bin/Debug/netcoreapp3.1/Invoices.pdb
+/server/Invoices/obj/Debug/netcoreapp3.1/Invoices.csproj.CoreCompileInputs.cache
+/server/Invoices/obj/Debug/netcoreapp3.1/Invoices.csprojAssemblyReference.cache
+/server/Invoices/obj/Debug/netcoreapp3.1/Invoices.dll
+/server/Invoices/obj/Debug/netcoreapp3.1/Invoices.pdb

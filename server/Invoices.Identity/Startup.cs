@@ -6,6 +6,8 @@ using Invoices.Identity.Services.RoleService;
 using Invoices.Identity.Services.TokenService;
 using Invoices.Identity.Services.UserService;
 using Invoices.Shared.Extensions;
+using Invoices.Shared.Middlewares;
+using Invoices.Shared.Services.CurrentToken;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +28,7 @@ namespace Invoices.Identity
         {
             services
                 .AddWebService<InvoicesIdentityDbContext>(this.Configuration)
+                .AddMessaging()
                 .AddTransient<IRoleService, RoleService>()
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IPasswordService, PasswordService>()

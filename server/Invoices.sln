@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices", "Invoices\Invoices.csproj", "{D06D45FD-8A23-4C40-A0B1-2AC9ACB7EC7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.Shared", "Invoices.Shared\Invoices.Shared.csproj", "{F6CAC21F-2CF2-484D-913C-204C0A04C417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoices.Shared", "Invoices.Shared\Invoices.Shared.csproj", "{F6CAC21F-2CF2-484D-913C-204C0A04C417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.Identity", "Invoices.Identity\Invoices.Identity.csproj", "{752C9EB4-F318-4E14-967B-6DFF1DCC72F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoices.Identity", "Invoices.Identity\Invoices.Identity.csproj", "{752C9EB4-F318-4E14-967B-6DFF1DCC72F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.InvoiceGenerator", "Invoices.InvoiceGenerator\Invoices.InvoiceGenerator.csproj", "{687F3E6F-6399-40E1-821B-19BF750A1D9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.Logger", "Invoices.Logger\Invoices.Logger.csproj", "{EDF1DF3A-7925-44E4-B4E4-221CF5C2FFD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoices.Management", "Invoices.Management\Invoices.Management.csproj", "{65E45789-8341-499A-BE75-54BF6E5E59F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D06D45FD-8A23-4C40-A0B1-2AC9ACB7EC7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D06D45FD-8A23-4C40-A0B1-2AC9ACB7EC7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D06D45FD-8A23-4C40-A0B1-2AC9ACB7EC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D06D45FD-8A23-4C40-A0B1-2AC9ACB7EC7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F6CAC21F-2CF2-484D-913C-204C0A04C417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6CAC21F-2CF2-484D-913C-204C0A04C417}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6CAC21F-2CF2-484D-913C-204C0A04C417}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +27,18 @@ Global
 		{752C9EB4-F318-4E14-967B-6DFF1DCC72F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{752C9EB4-F318-4E14-967B-6DFF1DCC72F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{752C9EB4-F318-4E14-967B-6DFF1DCC72F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687F3E6F-6399-40E1-821B-19BF750A1D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687F3E6F-6399-40E1-821B-19BF750A1D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687F3E6F-6399-40E1-821B-19BF750A1D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687F3E6F-6399-40E1-821B-19BF750A1D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF1DF3A-7925-44E4-B4E4-221CF5C2FFD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF1DF3A-7925-44E4-B4E4-221CF5C2FFD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF1DF3A-7925-44E4-B4E4-221CF5C2FFD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF1DF3A-7925-44E4-B4E4-221CF5C2FFD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E45789-8341-499A-BE75-54BF6E5E59F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E45789-8341-499A-BE75-54BF6E5E59F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E45789-8341-499A-BE75-54BF6E5E59F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E45789-8341-499A-BE75-54BF6E5E59F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,11 +12,41 @@ import CreateInvoice from './components/views/invoices/create-invoice/create-inv
 import CreateRole from './components/views/roles/create-role/create-role';
 import Logout from './components/views/logout/logout';
 import Admin from './components/views/admin/admin/admin';
+import {
+  Link,
+  MessageBar,
+  MessageBarType
+} from 'office-ui-fabric-react';
+import { initializeIcons } from '@uifabric/icons';
+initializeIcons();
 
 function App() {
+  const [state, setState] = React.useState({
+    showNotification: true,
+  })
+
+  const closeNotification = () => {
+    setState({showNotification: false});
+  }
   return (
     <div className="App">
       <Navbar/>
+      {
+        state.showNotification 
+          && <MessageBar
+              className='notification'
+              messageBarType={MessageBarType.success}
+              isMultiline={false}
+              onDismiss={closeNotification}
+              dismissButtonAriaLabel="Close"
+            >
+              This is a test notification
+              <Link href='/invoices'>
+                Invoices
+              </Link>
+            </MessageBar>
+      }
+
       <BrowserRouter>
           <Switch>
               <Route exact path='/' component={Home} />

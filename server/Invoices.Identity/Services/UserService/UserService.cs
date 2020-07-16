@@ -23,7 +23,7 @@ namespace Invoices.Identity.Services.UserService
             this.roleService = roleService;
         }
 
-        public async Task CreateAsync(string nationalIdentityNumber, string name, string email, string password)
+        public async Task CreateAsync(Guid userId, string nationalIdentityNumber, string name, string email, string password)
         {
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -34,6 +34,7 @@ namespace Invoices.Identity.Services.UserService
 
             var user = new User
             {
+                Id = userId,
                 NationalIdentityNumber = nationalIdentityNumber,
                 Name = name,
                 Email = email,
@@ -115,5 +116,11 @@ namespace Invoices.Identity.Services.UserService
                 await this.db.SaveChangesAsync();
             }
         }
+
+        public async Task<Guid> GetUserIdByIdNumber(string idNumber)
+            => await this.db.Users
+                .Where(u => u.NationalIdentityNumber.ToLower() == idNumber.ToLower())
+                .Select(u => u.Id)
+                .SingleOrDefaultAsync();
     }
 }

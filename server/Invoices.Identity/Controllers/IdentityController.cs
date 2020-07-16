@@ -2,10 +2,14 @@
 using Invoices.Identity.Services.IdentityService;
 using Invoices.Identity.Services.PasswordService;
 using Invoices.Identity.Services.UserService;
+using Invoices.Shared.Attributes;
 using Invoices.Shared.Controllers;
 using Invoices.Shared.Extensions;
+using Invoices.Shared.Models.MessageModels;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Invoices.Identity.Controllers
@@ -18,17 +22,21 @@ namespace Invoices.Identity.Controllers
         private readonly IUserService userService;
         private readonly IPasswordService passwordService;
         private readonly IIdentityService identityService;
+        private readonly IBus publisher;
 
         public IdentityController(
             IUserService userService,
             IPasswordService passwordService,
-            IIdentityService identityService)
+            IIdentityService identityService,
+            IBus publisher)
         {
             this.userService = userService;
             this.passwordService = passwordService;
             this.identityService = identityService;
+            this.publisher = publisher;
         }
 
+        [Log]
         [HttpPost]
         [Route(nameof(Login))]
         public async Task<ActionResult> Login(LoginInput input)
@@ -60,7 +68,16 @@ namespace Invoices.Identity.Controllers
                 return BadRequest("User already exists!");
             }
 
-            await this.userService.CreateAsync(input.NationalIdentityNumber, input.Name, input.Email, input.Password);
+            var userId = Guid.NewGuid();
+
+            await this.userService.CreateAsync(userId, input.NationalIdentityNumber, input.Name, input.Email, input.Password);
+            
+            await publisher.Publish(new AddClientMessage
+            {
+                UserId = userId,
+                ClientName = input.Name,
+                NationalIdentityNumber = input.NationalIdentityNumber
+            });
 
             return Ok("User created succsessfully");
         }

@@ -7,7 +7,7 @@ namespace Invoices.Identity.Services.UserService
 {
     public interface IUserService
     {
-        Task CreateAsync(string nationalIdentityNumber, string name, string email, string password);
+        Task CreateAsync(Guid userId, string nationalIdentityNumber, string name, string email, string password);
 
         Task<User> GetByEmailAsync(string email);
 
@@ -16,6 +16,8 @@ namespace Invoices.Identity.Services.UserService
         Task<bool> ExistsByEmailAsync(string email);
 
         Task<bool> ExistsByIdAsync(Guid id);
+
+        Task<Guid> GetUserIdByIdNumber(string idNumber);
 
         Task<bool> IsInRoleAsync(string userEmail, string roleName);
 
