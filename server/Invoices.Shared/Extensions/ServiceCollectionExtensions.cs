@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Invoices.Shared.Extensions
 {
@@ -40,7 +39,8 @@ namespace Invoices.Shared.Extensions
 
         public static IServiceCollection AddTokenAuthentication(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            JwtBearerEvents events = null)
         {
             var secret = configuration
                 .GetSection(nameof(ApplicationSettings))
@@ -48,29 +48,36 @@ namespace Invoices.Shared.Extensions
 
             var key = Encoding.ASCII.GetBytes(secret);
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(bearer =>
-            {
-                bearer.RequireHttpsMetadata = false;
-                bearer.SaveToken = true;
-                bearer.TokenValidationParameters = new TokenValidationParameters
+            services
+                .AddAuthentication(authentication =>
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+                    authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(bearer =>
+                {
+                    bearer.RequireHttpsMetadata = false;
+                    bearer.SaveToken = true;
+                    bearer.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+
+                    if (events != null)
+                    {
+                        bearer.Events = events;
+                    }
+                });
 
             services.AddHttpContextAccessor();
             services.AddScoped<ILoggedUserService, LoggedUserService>();
 
             return services;
         }
+
 
         public static IServiceCollection AddMessaging(
             this IServiceCollection services,

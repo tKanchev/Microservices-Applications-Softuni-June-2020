@@ -17,7 +17,6 @@ class Logout extends Component<ILogoutProps, ILogoutState> {
 
     componentDidMount() {
         localStorage.clear();
-        localStorage.clear();
         this.setState({redirect: true}, () => {window.location.reload()});
     }
 

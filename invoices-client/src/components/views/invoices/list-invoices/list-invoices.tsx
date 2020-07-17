@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { DetailsList, DetailsListLayoutMode, IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import InvoiceService from '../../../../services/invoice.service';
-import TestService from '../../../../services/test.service';
 
 interface IListInvoicesProps {}
 interface IListInvoicesState {

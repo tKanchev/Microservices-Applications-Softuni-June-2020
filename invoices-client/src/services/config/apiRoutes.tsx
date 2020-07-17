@@ -2,8 +2,8 @@ export const baseRouteDev = {
     identity: 'https://localhost:5001/identity',
     roles: 'https://localhost:5001/roles',
     users: 'https://localhost:5001/users',
-    invoices: 'https://localhost:5007/invoices',
-    test: 'https://localhost:5005/test/hui',
+    invoices: 'https://localhost:5006/invoices',
+    test: 'https://localhost:5006/test',
 }
 
 export const ApiRoutes = {

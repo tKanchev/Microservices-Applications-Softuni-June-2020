@@ -32,14 +32,12 @@ namespace Invoices.Management.Controllers
         [Route(nameof(All))]
         public async Task<IActionResult> All()
         {
-            //if (this.loggedUserService.IsAdmin)
-            //{
-            //    return Ok(await this.invoiceService.AllAsync());
-            //}
+            if (this.loggedUserService.IsAdmin)
+            {
+                return Ok(await this.invoiceService.AllAsync());
+            }
 
-            //return Ok(await this.invoiceService.AllByUserIdAsync(Guid.Parse(this.loggedUserService.UserId)));
-
-            return Ok(await this.invoiceService.AllAsync());
+            return Ok(await this.invoiceService.AllByUserIdAsync(Guid.Parse(this.loggedUserService.UserId)));
         }
 
         [HttpPost]
@@ -51,7 +49,13 @@ namespace Invoices.Management.Controllers
 
             await this.invoiceService.CreateAsync(input, userId);
 
-            return Ok("Invoice is generating");
+            await publisher.Publish(new CreatedInvoiceMessage
+            {
+                UserId = userId,
+                Amount = input.Amount
+            });
+
+            return Ok("Invoice is generated");
         }
     }
 }

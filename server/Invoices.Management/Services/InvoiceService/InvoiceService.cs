@@ -20,7 +20,6 @@ namespace Invoices.Management.Services.InvoiceService
 
         public async Task<InvoiceOutput[]> AllAsync()
             => await this.db.Invoices
-                .Include(i => i.Client)
                 .Select(i => new InvoiceOutput
                 {
                     Id = i.Id,
@@ -31,6 +30,20 @@ namespace Invoices.Management.Services.InvoiceService
                     ClientName = i.Client.ClientName
                 })
                 .ToArrayAsync();
+
+        public async Task<InvoiceOutput[]> AllByUserIdAsync(Guid userId)
+            => await this.db.Invoices
+                    .Where(i => i.Client.UserId == userId)
+                    .Select(i => new InvoiceOutput
+                    {
+                        Id = i.Id,
+                        Number = i.Number,
+                        Date = i.Date,
+                        Amount = i.Amount,
+                        NationalIdentityNumber = i.Client.NationalIdentityNumber,
+                        ClientName = i.Client.ClientName
+                    })
+                    .ToArrayAsync();
 
         public async Task CreateAsync(InvoiceInput input, Guid userId)
         {

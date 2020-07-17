@@ -25,21 +25,6 @@ class CreateInvoice extends Component<ICreateinvoiceProps, ICreateInvoiceState> 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        // this.setState({errorMessage: ''}, async () => {
-        //     try {
-        //         // const clientsResult = await InvoiceService.allClients() as [];
-        //         // const clients = clientsResult.map((c: any) => {return { key: c.userId, text: c.name }});
-                
-        //         // this.setState({clients: clients})
-                
-        //         // console.log(clients)
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // })
-    }
-
     private handleInputChange(event: any) {
         const target = event.target;
         const value = target.value;

@@ -9,7 +9,7 @@ namespace Invoices.Management.Services.InvoiceService
     {
         Task<InvoiceOutput[]> AllAsync();
 
-        //Task<InvoiceOutput[]> AllByUserIdAsync(Guid id);
+        Task<InvoiceOutput[]> AllByUserIdAsync(Guid userId);
 
         Task CreateAsync(InvoiceInput input, Guid userId);
     }
