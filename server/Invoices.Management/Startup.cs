@@ -63,29 +63,6 @@ namespace Invoices.Management
                 {
                     endpoints.MapControllers();
                 });
-
-            //app.UseHttpsRedirection();
-
-            //app.UseRouting();
-
-            //app.UseJwtHeaderAuthentication();
-
-            //app.UseAuthorization();
-
-            //app.UseCors(options => options
-            //        .AllowAnyOrigin()
-            //        .AllowAnyHeader()
-            //        .AllowAnyMethod());
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
-
-            //app
-            //    .UseWebService(env)
-            //    .UseJwtHeaderAuthentication()
-            //    .UseDatabaseMigration();
         }
         
     }

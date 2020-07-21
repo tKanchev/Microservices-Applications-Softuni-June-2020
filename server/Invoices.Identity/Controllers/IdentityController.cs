@@ -2,7 +2,6 @@
 using Invoices.Identity.Services.IdentityService;
 using Invoices.Identity.Services.PasswordService;
 using Invoices.Identity.Services.UserService;
-using Invoices.Shared.Attributes;
 using Invoices.Shared.Controllers;
 using Invoices.Shared.Extensions;
 using Invoices.Shared.Models.MessageModels;
@@ -36,7 +35,6 @@ namespace Invoices.Identity.Controllers
             this.publisher = publisher;
         }
 
-        [Log]
         [HttpPost]
         [Route(nameof(Login))]
         public async Task<ActionResult> Login(LoginInput input)

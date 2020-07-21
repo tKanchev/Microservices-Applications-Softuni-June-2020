@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  invoices.identity:
+    image: ${DOCKER_REGISTRY-}invoicesidentity
+    build:
+      context: .
+      dockerfile: Invoices.Identity/Dockerfile

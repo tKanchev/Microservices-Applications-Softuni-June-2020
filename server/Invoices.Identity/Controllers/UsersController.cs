@@ -2,7 +2,6 @@
 using Invoices.Identity.Services.IdentityService;
 using Invoices.Identity.Services.UserService;
 using Invoices.Shared.Controllers;
-using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

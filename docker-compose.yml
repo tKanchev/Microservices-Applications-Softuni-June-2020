@@ -1,0 +1,105 @@
+version: "3.4"
+
+services:
+    
+    data:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports: 
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=yourStrongPassword12!@
+        volumes: 
+            - sqldata:/var/opt/mssql 
+        networks: 
+            - invoices-app-network
+    
+    messages:
+        container_name: rabbitmq
+        image: rabbitmq:3-management
+        ports:
+        - "15672:15672"
+        - "5672:5672"
+        hostname: "rabbitmq"
+        environment:
+        - RABBITMQ_ERLANG_COOKIE=Rand0mR4bbitMqCo0k1e
+        - RABBITMQ_DEFAULT_USER=rabbitmq
+        - RABBITMQ_DEFAULT_PASS=rabbitmq
+        networks:
+        - invoices-app-network
+    
+    identity:
+        container_name: identity
+        build:
+            context: ./server
+            dockerfile: ./Invoices.Identity/Dockerfile
+        ports:
+            - "5000:80"
+        env_file: server/Invoices.Shared/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=Invoices.IdentityDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks:
+            - invoices-app-network
+        depends_on:
+            - data
+    
+    management:
+        container_name: management
+        build:
+            context: ./server
+            dockerfile: ./Invoices.Management/Dockerfile
+        ports:
+            - "5005:80"
+        env_file: server/Invoices.Shared/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=Invoices.ManagementDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ServiceEndpoints__Users=http://identity:5000
+        restart: on-failure
+        volumes:
+            - ./.aspnet/management/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks:
+            - invoices-app-network
+        depends_on:
+            - data
+            
+    logger:
+        container_name: logger
+        build:
+            context: ./server
+            dockerfile: ./Invoices.Logger/Dockerfile
+        ports:
+            - "5002:80"
+        env_file: server/Invoices.Shared/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=Invoices.LoggerDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/logger/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks:
+            - invoices-app-network
+        depends_on:
+            - data
+    
+    notifications:
+        container_name: notifications
+        build:
+            context: ./server
+            dockerfile: ./Invoices.Notifications/Dockerfile
+        ports:
+            - "5007:80"
+        env_file: server/Invoices.Shared/Common.env
+        restart: on-failure
+        volumes:
+            - ./.aspnet/notifications/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks:
+            - invoices-app-network
+        depends_on:
+            - data
+networks:
+    invoices-app-network:
+volumes:
+    sqldata:

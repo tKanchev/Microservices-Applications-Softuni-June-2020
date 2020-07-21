@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.Identity", "Invoic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.Logger", "Invoices.Logger\Invoices.Logger.csproj", "{EDF1DF3A-7925-44E4-B4E4-221CF5C2FFD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoices.Management", "Invoices.Management\Invoices.Management.csproj", "{65E45789-8341-499A-BE75-54BF6E5E59F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.Management", "Invoices.Management\Invoices.Management.csproj", "{65E45789-8341-499A-BE75-54BF6E5E59F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoices.Notifications", "Invoices.Notifications\Invoices.Notifications.csproj", "{A5C3E242-8B18-4F4F-953B-21954F5CB75A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoices.Notifications", "Invoices.Notifications\Invoices.Notifications.csproj", "{A5C3E242-8B18-4F4F-953B-21954F5CB75A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

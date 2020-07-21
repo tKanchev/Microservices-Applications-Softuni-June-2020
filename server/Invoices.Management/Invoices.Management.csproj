@@ -2,21 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>d6721d84-fe40-4ef1-8d42-c5842bedbebe</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Database\Migrations\20200706173515_Initial.cs" />
-    <Compile Remove="Database\Migrations\20200706173515_Initial.Designer.cs" />
-    <Compile Remove="Database\Migrations\20200706180146_Initial.cs" />
-    <Compile Remove="Database\Migrations\20200706180146_Initial.Designer.cs" />
-    <Compile Remove="Database\Migrations\20200706192838_Initial.cs" />
-    <Compile Remove="Database\Migrations\20200706192838_Initial.Designer.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Refit.HttpClientFactory" Version="5.1.67" />
   </ItemGroup>
   
