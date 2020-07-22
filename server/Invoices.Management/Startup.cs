@@ -62,7 +62,8 @@ namespace Invoices.Management
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
-                });
+                })
+                .UseDatabaseMigration();
         }
         
     }
