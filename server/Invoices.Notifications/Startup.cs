@@ -40,7 +40,7 @@ namespace Invoices.Notifications
             app
                 .UseRouting()
                 .UseCors(options => options
-                    .WithOrigins("http://localhost:3000")
+                    .WithOrigins("http://localhost:3001", "https://localhost:3000")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials())

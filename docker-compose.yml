@@ -99,6 +99,15 @@ services:
             - invoices-app-network
         depends_on:
             - data
+    client:
+        container_name: client
+        stdin_open: true
+        build:
+            context: ./invoices-client
+            dockerfile: Dockerfile
+
+        ports:
+            - "3001:3000"
 networks:
     invoices-app-network:
 volumes:

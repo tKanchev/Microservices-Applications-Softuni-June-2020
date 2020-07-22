@@ -15,6 +15,7 @@ import Admin from './components/views/admin/admin/admin';
 import { Link, MessageBar, MessageBarType } from 'office-ui-fabric-react';
 import * as signalR from '@microsoft/signalr';
 import { initializeIcons } from '@uifabric/icons';
+import {ApiRoutes} from './services/config/apiRoutes';
 initializeIcons();
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
 	};
 
 	const hubConnection = new signalR.HubConnectionBuilder()
-		.withUrl('https://localhost:5008/notifications', options)
+		.withUrl(ApiRoutes.notifications, options)
 		.build();
 
     hubConnection
