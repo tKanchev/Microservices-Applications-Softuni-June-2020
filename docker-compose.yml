@@ -57,7 +57,7 @@ services:
         env_file: server/Invoices.Shared/Common.env
         environment:
             - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=Invoices.ManagementDb;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - ServiceEndpoints__Users=http://identity:5000
+            - ServiceEndpoints__Users=http://identity:80
         restart: on-failure
         volumes:
             - ./.aspnet/management/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
